@@ -11,3 +11,8 @@ The following commands might be useful:
 * `mvn site` build and test the project and write results in `target/site/index.html` (includes coverage and test results)
 
 See the comments in `pom.xml` for technical details of this setup.
+
+
+two bug:
+peek
+ensureCapacity

@@ -31,6 +31,7 @@ public class IntQueueTest {
 
     private IntQueue mQueue;
     private List<Integer> testList;
+    private List<Integer> testList_10;
 
     /**
      * Called before each test.
@@ -38,10 +39,11 @@ public class IntQueueTest {
     @Before
     public void setUp() {
         // comment/uncomment these lines to test each class
-        mQueue = new LinkedIntQueue();
-    //    mQueue = new ArrayIntQueue();
+//        mQueue = new LinkedIntQueue();
+        mQueue = new ArrayIntQueue();
 
         testList = new ArrayList<>(List.of(1, 2, 3));
+        testList_10 = new ArrayList<>(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
     }
 
     @Test
@@ -53,19 +55,26 @@ public class IntQueueTest {
     @Test
     public void testNotEmpty() {
         // TODO: write your own unit test
-        fail("Test not implemented");
+        for (Integer integer : testList) {
+            mQueue.enqueue(integer);
+            assertFalse(mQueue.isEmpty());
+        }
     }
 
     @Test
     public void testPeekEmptyQueue() {
         // TODO: write your own unit test
-        fail("Test not implemented");
+//        fail("Test not implemented");
+        assertNull(mQueue.peek());
     }
 
     @Test
     public void testPeekNoEmptyQueue() {
         // TODO: write your own unit test
-        fail("Test not implemented");
+        for (Integer integer : testList) {
+            mQueue.enqueue(integer);
+        }
+        assertEquals(testList.get(0), mQueue.peek());
     }
 
     @Test
@@ -81,8 +90,37 @@ public class IntQueueTest {
     @Test
     public void testDequeue() {
         // TODO: write your own unit test
-        fail("Test not implemented");
+        assertNull(mQueue.dequeue());
+        for (Integer integer : testList) {
+            mQueue.enqueue(integer);
+        }
+        Integer head = mQueue.dequeue();
+        assertEquals(testList.get(0), head);
     }
+
+    @Test
+    public void testClear(){
+        mQueue.clear();
+        assertEquals(0, mQueue.size());
+    }
+
+    @Test
+    public void testSize(){
+        for (Integer integer : testList) {
+            mQueue.enqueue(integer);
+        }
+        assertEquals(testList.size(), mQueue.size());
+    }
+
+    @Test
+    public void testEnsureCapacity(){
+        for (Integer integer : testList_10) {
+            mQueue.enqueue(integer);
+        }
+        mQueue.enqueue(11);
+        assertEquals(11, mQueue.size());
+    }
+
 
     @Test
     public void testContent() throws IOException {
